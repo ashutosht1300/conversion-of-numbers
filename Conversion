@@ -1,0 +1,152 @@
+"""
+Welcome to Number conversion program.
+
+convert no. from any (binary, octal, decimal, hexadecimal) to any (binary, octal, decimal, hexadecimal) number.
+
+use following shortcut for:
+decimal - dec
+binary - bin
+octal - oct
+hexadecimal - hex
+
+input format:
+
+* in first two line enter your conversion type
+eg- dec
+    bin
+    
+* now enter your number
+eg- 28
+
+output:
+28 dec to bin 11100
+
+"""
+def dec_to_bin(n):
+    t = int(n)
+    bin = []
+    while t != 0:
+        bin.insert(0,str(t%2))
+        t=t//2
+    return "".join(bin)
+
+def dec_to_oct(n):
+    t = int(n)
+    oct = []
+    while t != 0:
+        oct.insert(0,str(t%8))
+        t=t//8
+    return "".join(oct)
+
+def dec_to_hex(n):
+    t = int(n)
+    hex = []
+    v={10:'a',11:'b',12:'c',13:'d',14:'e',15:'f'}
+    while t != 0:
+        dig = t%16
+        if dig >9:
+            d= v.get(dig)
+        else:
+            d=str(dig)
+        hex.insert(0,d)
+        t=t//16
+    return "".join(hex)
+ 
+def bin_to_dec(n):
+    dec = 0
+    t=list(n)
+    if not all((i=='0' or i=='1') for i in t):
+        print("wrong number")
+        return
+    for r in range(len(t)):
+        dig = t.pop()
+        if dig == '1':
+            dec = dec + pow(2, r)
+    return str(dec)
+
+def oct_to_dec(n):
+    dec = 0
+    t=list(n)
+    if any((i=='8' or i=='9')for i in t):
+        print("wrong number")
+        return
+    for r in range(len(t)):
+        dig = int(t.pop())
+        dec = dec + dig * pow(8, r)
+    return str(dec)
+
+def hex_to_dec(n):
+    dec = 0
+    t=list(n)
+    if not all((i in ['1','2','3','4','5','6',
+    '7','8','9','a','b','c','d','e','f']) for i in t):
+        print("wrong number")
+        return
+    for r in range(len(t)):
+        dig = t.pop()
+        dec = dec + value[dig] * pow(16, r)
+    return str(dec)
+    
+value= {'1':1,'2':2,'3':3,'4':4,
+            '5':5,'6':6,'7':7,'8':8,
+            '9':9,'a':10,'b':11,'c':12,
+            'd':13,'e':14,'f':15,'0':0}
+            
+
+
+print("Welcome to Number conversion")
+print("=============================")
+print("""
+Use following shortcuts
+dec - Decimal
+bin - Binary
+oct - Octal
+hex - Hexadecimal
+""" )
+
+conv_from = input("conversion from ")
+conv_to = input("conversion to ")
+num = input("Enter number")
+print()
+print("=============================")
+if conv_from =="dec" and conv_to=="bin":
+    print(num+" dec to bin "+dec_to_bin(num))
+
+if conv_from =="dec" and conv_to=="oct":
+    print(num+" dec to oct "+dec_to_oct(num))
+
+if conv_from =="dec" and conv_to=="hex":
+    print(num+" dec to hex "+dec_to_hex(num))
+
+if conv_from =="bin" and conv_to=="dec":
+    print(num+" bin to dec "+bin_to_dec(num))
+
+if conv_from =="bin" and conv_to=="oct":
+    nu = bin_to_dec(num)
+    print(num+" bin to oct " +dec_to_oct(nu))
+
+if conv_from =="bin" and conv_to=="hex":
+    nu = bin_to_dec(num)
+    print(num+" bin to hex "+dec_to_hex(nu))
+
+if conv_from =="oct" and conv_to=="bin":
+    nu=oct_to_dec(num)
+    print(num+" oct to bin "+dec_to_bin(nu))
+
+if conv_from =="oct" and conv_to=="dec":
+    print(num+" oct to dec "+oct_to_dec(num))
+
+if conv_from =="oct" and conv_to=="hex":
+    nu=oct_to_dec(num)
+    print(num+" oct to hex "+dec_to_hex(nu))
+
+if conv_from =="hex" and conv_to=="bin":
+    nu=hex_to_dec(num)
+    print(num+" hex to bin "+dec_to_bin(nu))
+
+if conv_from =="hex" and conv_to=="oct":
+    nu=hex_to_dec(num)
+    print(num+" hex to oct "+dec_to_oct(nu))
+
+if conv_from =="hex" and conv_to=="dec":
+    print(num+" hex to dec "+hex_to_dec(num))
